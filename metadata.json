@@ -1,0 +1,7 @@
+{
+  "name": "SportMatch Gran Canaria",
+  "description": "Plataforma de coordinación deportiva para residentes y visitantes de Las Palmas de Gran Canaria, enfocada en la inclusión y logística local.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
