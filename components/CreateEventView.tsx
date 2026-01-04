@@ -7,21 +7,35 @@ interface CreateEventViewProps {
 }
 
 const PIL_LOCATIONS = [
-  'La Cícer (Las Canteras)',
-  'Parque Romano',
-  'El Confital',
-  'Parque San Telmo',
-  'Muelle Deportivo',
-  'Playa de Alcaravaneras'
+  '📍 Zona Las Canteras / Cícer (Playa)',
+  '📍 Zona Las Canteras / Playa Chica (Playa)',
+  '📍 Zona El Confital / La Isleta',
+  '📍 Zona Puerto / Parque Santa Catalina',
+  '📍 Zona Ciudad Jardín / Parque Romano',
+  '📍 Zona Triana / Vegueta',
+  '📍 Zona Siete Palmas',
+  '📍 Zona Escaleritas / La Ballena',
+  '📍 Zona Tafira / Bandama (Montaña/Golf)',
+  '📍 Zona Cumbre / Roque Nublo',
+  '📍 Zona Sur / Maspalomas'
 ];
 
 const ACTIVITIES = [
-  'Surf',
-  'Senderismo',
-  'Pádel',
-  'Running',
-  'Crossfit Beach',
-  'Voley Playa'
+  'Surf / Bodyboard',
+  'Fútbol 7',
+  'Fútbol 11',
+  'Fútbol Sala',
+  'Baloncesto',
+  'Padel',
+  'Tenis',
+  'Golf',
+  'Voleibol Playa',
+  'Balonmano',
+  'Trail Running / Senderismo',
+  'Ciclismo / MTB',
+  'Calistenia (Entreno callejero)',
+  'Yoga al aire libre',
+  'Buceo / Snorkel'
 ];
 
 export const CreateEventView: React.FC<CreateEventViewProps> = ({ onBack }) => {
@@ -43,7 +57,6 @@ export const CreateEventView: React.FC<CreateEventViewProps> = ({ onBack }) => {
       createdAt: Date.now()
     };
 
-    // Save to LocalStorage
     const existingEventsJson = localStorage.getItem('sportmatch_events');
     const existingEvents: SportEvent[] = existingEventsJson ? JSON.parse(existingEventsJson) : [];
     const updatedEvents = [newEvent, ...existingEvents];
@@ -51,11 +64,11 @@ export const CreateEventView: React.FC<CreateEventViewProps> = ({ onBack }) => {
     localStorage.setItem('sportmatch_events', JSON.stringify(updatedEvents));
 
     alert('¡Evento publicado con éxito! 🎉');
-    onBack(); // Return to home
+    onBack();
   };
 
   return (
-    <div className="max-w-xl mx-auto w-full p-6 animate-fadeIn">
+    <div className="max-w-xl mx-auto w-full p-6 animate-fadeIn pb-12">
       <button 
         onClick={onBack}
         className="mb-6 text-ocean font-bold flex items-center gap-2 hover:underline group"
@@ -68,7 +81,6 @@ export const CreateEventView: React.FC<CreateEventViewProps> = ({ onBack }) => {
         <p className="text-gray-500 mb-8 font-medium">Define tu actividad y encuentra compañeros en la isla.</p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Actividad */}
           <div>
             <label className="block text-sm font-bold text-volcanic mb-2 uppercase tracking-wide">Actividad</label>
             <select 
@@ -80,7 +92,6 @@ export const CreateEventView: React.FC<CreateEventViewProps> = ({ onBack }) => {
             </select>
           </div>
 
-          {/* Nivel y Mentor */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-bold text-volcanic mb-2 uppercase tracking-wide">Nivel Requerido</label>
@@ -108,9 +119,8 @@ export const CreateEventView: React.FC<CreateEventViewProps> = ({ onBack }) => {
             </div>
           </div>
 
-          {/* Ubicación (PIL) */}
           <div>
-            <label className="block text-sm font-bold text-volcanic mb-2 uppercase tracking-wide">Punto de Interés Local (PIL)</label>
+            <label className="block text-sm font-bold text-volcanic mb-2 uppercase tracking-wide">Zona / Punto de Interés Local (PIL)</label>
             <select 
               className="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-ocean rounded-xl outline-none transition-all font-medium"
               value={formData.location}
@@ -120,7 +130,6 @@ export const CreateEventView: React.FC<CreateEventViewProps> = ({ onBack }) => {
             </select>
           </div>
 
-          {/* Fecha y Hora */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-bold text-volcanic mb-2 uppercase tracking-wide">Fecha</label>

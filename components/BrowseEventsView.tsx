@@ -7,7 +7,25 @@ interface BrowseEventsViewProps {
   onJoin: (event: SportEvent) => void;
 }
 
-const ACTIVITIES = ['Todas', 'Surf', 'Senderismo', 'Pádel', 'Running', 'Crossfit Beach', 'Voley Playa'];
+const ACTIVITIES = [
+  'Todas',
+  'Surf / Bodyboard',
+  'Fútbol 7',
+  'Fútbol 11',
+  'Fútbol Sala',
+  'Baloncesto',
+  'Padel',
+  'Tenis',
+  'Golf',
+  'Voleibol Playa',
+  'Balonmano',
+  'Trail Running / Senderismo',
+  'Ciclismo / MTB',
+  'Calistenia (Entreno callejero)',
+  'Yoga al aire libre',
+  'Buceo / Snorkel'
+];
+
 const LEVELS = ['Todos', ...Object.values(SportLevel)];
 
 export const BrowseEventsView: React.FC<BrowseEventsViewProps> = ({ onBack, onJoin }) => {
@@ -60,12 +78,12 @@ export const BrowseEventsView: React.FC<BrowseEventsViewProps> = ({ onBack, onJo
       
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
         <div>
-          <h2 className="text-4xl font-extrabold text-volcanic">Explorar Actividades</h2>
+          <h2 className="text-4xl font-extrabold text-volcanic tracking-tight">Explorar Actividades</h2>
           <p className="text-gray-500 font-medium">Filtra tus intereses o déjate sorprender por la isla.</p>
         </div>
         
         <div className="w-full md:w-auto bg-white p-4 rounded-3xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 items-end">
-          <div className="w-full md:w-40">
+          <div className="w-full md:w-48">
             <label className="block text-[10px] font-black text-gray-400 uppercase mb-1 px-1">Actividad</label>
             <select 
               className="w-full p-3 bg-gray-50 rounded-xl outline-none font-bold text-sm border-2 border-transparent focus:border-ocean transition-all"
@@ -125,12 +143,13 @@ export const BrowseEventsView: React.FC<BrowseEventsViewProps> = ({ onBack, onJo
                     <span className={`text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest ${isForced ? 'bg-sand text-volcanic' : 'bg-volcanic text-white'}`}>
                       {event.activity}
                     </span>
-                    <span className="text-ocean font-bold text-[11px] flex items-center gap-1 bg-ocean/5 px-2 py-1 rounded-lg">📍 {event.location.split(' ')[0]}</span>
+                    <span className="text-ocean font-bold text-[11px] flex items-center gap-1 bg-ocean/5 px-2 py-1 rounded-lg">📍 {event.location.includes('Zona') ? event.location.split('Zona')[1].trim().split(' ')[0] : 'GC'}</span>
                 </div>
                 
                 <h3 className="text-2xl font-black text-volcanic mb-1 leading-tight">
-                  {event.activity} en {event.location.includes('(') ? event.location.split('(')[0] : event.location}
+                  {event.activity}
                 </h3>
+                <p className="text-sm font-bold text-volcanic/60 mb-4">{event.location}</p>
 
                 {event.isMentor && (
                   <div className="flex items-center gap-1 mb-4 text-green-700 font-black text-[10px] uppercase bg-green-100 w-fit px-3 py-1 rounded-full mt-1 border border-green-200">
